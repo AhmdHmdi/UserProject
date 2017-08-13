@@ -22,13 +22,9 @@ public class Base {
 	private boolean CheckNameExists= false;
 	private String strRandom = "";
 	Boolean isPresent;
-	static Boolean isWindows= false;
 
 	public static WebDriver LoadDriver(WebDriver driver, String DriverName)
 	{
-		if (isWindows ==false)
-		{
-			// Setup FireFox and Chrome Driver for Linux. 
 			if (DriverName == "F")
 			{
 				System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver");
@@ -54,28 +50,7 @@ public class Base {
 				System.out.println("Please Enter Correct Driver Name: F or C");
 				driver = null;
 			}
-		}
-		else 
-		{
-			// Setup FireFox and Chrome Driver for Windows. 
-						if (DriverName == "F")
-						{
-							System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver.exe");
-							driver = new FirefoxDriver();
-							return driver;
-						}
-						else if (DriverName == "C")
-						{
-							System.setProperty("webdriver.chrome.driver", "src/drivers/chromedriver.exe");
-							driver = new ChromeDriver();
-							return driver;
-						}
-						else 
-						{
-							System.out.println("Please Enter Correct Driver Name: F or C");
-							driver = null;
-						}
-		}
+		
 		return driver;
 	}
 	
