@@ -220,7 +220,7 @@ public class Base {
 	}else
 	{
 		String ActualMessage = driver.findElement(By.id(elementId)).getText().toString();
-		if (ExpectedMessage == ActualMessage)
+		if (ExpectedMessage.equals(ActualMessage))
 		{
 			Passed = true;
 		}else
