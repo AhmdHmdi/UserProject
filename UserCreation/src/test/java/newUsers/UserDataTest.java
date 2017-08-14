@@ -1,10 +1,9 @@
 package newUsers;
 
 import static org.junit.Assert.fail;
-
-
 import java.util.concurrent.TimeUnit;
 
+import org.junit.After;
 import org.junit.Test;
 
 public class UserDataTest extends Base {
@@ -246,4 +245,11 @@ public class UserDataTest extends Base {
 				
 	}
 	
+	@After
+	public void CloseBrowser()
+	{
+		driver.close();
+		
+	}
+
 }

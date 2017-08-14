@@ -22,11 +22,26 @@ public class Base {
 	private boolean CheckNameExists= false;
 	private String strRandom = "";
 	Boolean isPresent;
-	static Boolean isWindows =false;
 
+	public static String OSDetector () {
+		String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("win"))
+		{
+			return "Windows";
+		}
+		else if (os.contains("nux") || os.contains("nix"))
+		{
+			return "Linux";
+		}
+		else
+		{
+			return "Other";
+		}
+	}
+	
 	public static WebDriver LoadDriver(WebDriver driver, String DriverName)
 	{
-		if (isWindows == false)
+		if (OSDetector().toString().equals("Linux"))
 		{
 			if (DriverName == "F")
 			{
@@ -53,7 +68,7 @@ public class Base {
 				System.out.println("Please Enter Correct Driver Name: F or C");
 				driver = null;
 			}
-		}else
+		}else if (OSDetector().toString().equals("Windows"))
 		{
 
 			if (DriverName == "F")
@@ -82,7 +97,11 @@ public class Base {
 				driver = null;
 			}
 		}
-		
+		else
+		{
+			System.out.println("Operating System is not supported.");
+			driver.quit();
+		}
 		return driver;
 	}
 	
