@@ -22,9 +22,12 @@ public class Base {
 	private boolean CheckNameExists= false;
 	private String strRandom = "";
 	Boolean isPresent;
+	static Boolean isWindows =false;
 
 	public static WebDriver LoadDriver(WebDriver driver, String DriverName)
 	{
+		if (isWindows == false)
+		{
 			if (DriverName == "F")
 			{
 				System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver");
@@ -50,6 +53,35 @@ public class Base {
 				System.out.println("Please Enter Correct Driver Name: F or C");
 				driver = null;
 			}
+		}else
+		{
+
+			if (DriverName == "F")
+			{
+				System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver.exe");
+				ProfilesIni profile = new ProfilesIni();
+				FirefoxProfile Uprofile = profile.getProfile("default");
+				Uprofile.setAcceptUntrustedCertificates(true);
+				Uprofile.setAssumeUntrustedCertificateIssuer(true);
+				Uprofile.setPreference("security.insecure_field_warning.contextual.enabled", false);
+				DesiredCapabilities cap = DesiredCapabilities.firefox();
+				cap.setCapability(FirefoxDriver.PROFILE, Uprofile);
+				cap.setCapability("marionette", true);
+				driver = new FirefoxDriver(cap);
+				return driver;
+			}
+			else if (DriverName == "C")
+			{
+				System.setProperty("webdriver.chrome.driver", "src/drivers/chromedriver.exe");
+				driver = new ChromeDriver();
+				return driver;
+			}
+			else 
+			{
+				System.out.println("Please Enter Correct Driver Name: F or C");
+				driver = null;
+			}
+		}
 		
 		return driver;
 	}
@@ -171,11 +203,11 @@ public class Base {
 		int ValueToAddedToEmailOne = ThreadLocalRandom.current().nextInt(min, max + 1);
 		
 		if (IfEmail){
-			strRandom = strPrefix+"@R"+ValueToAddedToEmailOne+".com";
+			strRandom = strPrefix+"@AH"+ValueToAddedToEmailOne+"AHMail.com";
 		}
 		else
 		{
-			strRandom = strPrefix+"R"+ValueToAddedToEmailOne;
+			strRandom = strPrefix+"AH"+ValueToAddedToEmailOne+"AH";
 		}
 				return strRandom;
 	}

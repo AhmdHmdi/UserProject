@@ -78,11 +78,11 @@ public class UserDataTest extends Base {
 			
 			// We have two cases as we don't delete all users: If user exists and if not. 
 			// As Email should be unique too, we will create a random value twice and added them to email accounts
-			strValueOfEmailOne = RandomValue(10, 10000, "EmailOne", true);
-			strValueOfEmailTwo = RandomValue(10010, 20000, "EmailTwo", true);
+			strValueOfEmailOne = RandomValue(10, 10000000, "EmailOne", true);
+			strValueOfEmailTwo = RandomValue(10000010, 20000000, "EmailTwo", true);
 			
 			// Use Random Values
-			UserNameOne = RandomValue(100, 10000, "Name", false);
+			UserNameOne = RandomValue(100, 10000000, "Name", false);
 			UserNameOneRepeated = UserNameOne;
 			
 			boolean NameExists = checkNameIsUnique(UserNameOneRepeated);
@@ -161,29 +161,29 @@ public class UserDataTest extends Base {
 			
 			// We have two cases as we don't delete all users: If email exists and if not. 
 			// As Name should be unique too, we will create a random value twice and added them to user Name
-			strValueToAddToNameOne = RandomValue(5, 10000, "EmailUnique", false);
-			strValueToAddToNameTwo = RandomValue(10050, 50000, "EmailUnique", false);
+			strValueToAddToNameOne = RandomValue(5, 10000000, "EmailUnique", false);
+			strValueToAddToNameTwo = RandomValue(10000050, 50000000, "EmailUnique", false);
 			
 			// Use Random Values
-			strEmail = RandomValue(10000, 999999, "EmailUnique", true);
+			strEmail = RandomValue(1000000, 99999999, "EmailUnique", true);
 			strEmailRepeated = strEmail;
 			
 			boolean EmailExists = checkEmailIsUnique(strEmailRepeated);
 			if (EmailExists){  
 				// As the Email is existing, so we will need to create a user with same data
 				System.out.print("User Email Found");
-				FillUserData(driver, "EmailIsUnique"+strValueToAddToNameOne, strEmailRepeated, "12p@ssw3@rd", "12p@ssw3@rd", true);
+				FillUserData(driver, strValueToAddToNameOne, strEmailRepeated, "12p@ssw3@rd", "12p@ssw3@rd", true);
 			}
 			else
 			{
 				// User is not existing, we will create same email twice. 
 				// First Time	
-				FillUserData(driver, "EmailIsUnique"+strValueToAddToNameOne, strEmail, "12p@ssw3@rd", "12p@ssw3@rd", true);
+				FillUserData(driver, strValueToAddToNameOne, strEmail, "12p@ssw3@rd", "12p@ssw3@rd", true);
 				
 				Thread.sleep(2000);
 				driver.navigate().to(baseURL);
 				// Second Time
-				FillUserData(driver, "EmailIsUnique"+strValueToAddToNameTwo, strEmailRepeated, "12p@ssw3@rd", "12p@ssw3@rd", true);
+				FillUserData(driver, strValueToAddToNameTwo, strEmailRepeated, "12p@ssw3@rd", "12p@ssw3@rd", true);
 			}
 		
 		// Assertion of 'User Email Must be unique' 
@@ -205,8 +205,8 @@ public class UserDataTest extends Base {
 				// Open Browser
 				LoadBrowser();
 
-				strValueOfName = RandomValue(10, 10000, "Pass", false);
-				strValueOfEmail = RandomValue(10010, 20000, "Pass", true);
+				strValueOfName = RandomValue(10, 10000000, "Pass", false);
+				strValueOfEmail = RandomValue(10000010, 20000000, "Pass", true);
 				// Test Case #5: Password is required. 
 				// Fill in all data but set Password to be NULL
 				FillUserData(driver, strValueOfName, strValueOfEmail, "", "", true);
@@ -228,8 +228,8 @@ public class UserDataTest extends Base {
 				// Open Browser
 				LoadBrowser();
 
-				strValueOfName = RandomValue(10, 10000, "Pass", false);
-				strValueOfEmail = RandomValue(10010, 20000, "Pass", true);
+				strValueOfName = RandomValue(10, 10000000, "Pass", false);
+				strValueOfEmail = RandomValue(10000010, 20000000, "Pass", true);
 				// Test Case #6: Passwords are not the same. 
 				// Fill in all data but set Password a value which is different than the confirmation password.
 				FillUserData(driver, strValueOfName, strValueOfEmail, "12p@ssw3@rd", "nop@ssw3@rd", true);
